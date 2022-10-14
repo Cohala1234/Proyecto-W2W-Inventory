@@ -1,0 +1,137 @@
+CREATE TABLE client(
+	idClient INT PRIMARY KEY AUTO_INCREMENT,
+    nameClient VARCHAR(50),
+    phoneClient VARCHAR(50),
+    mailClient VARCHAR(50),
+    itTypeC INT,
+    idUser INT,
+    idSectorMaster INT
+    statusClient VARCHAR(30)
+);
+CREATE TABLE subClient(
+	idSubClient INT PRIMARY KEY AUTO_INCREMENT,
+    idClient INT,
+    idCountry INT,
+    idDepartament INT,
+    idCity INT,
+    idWarehouse INT, 
+    statusSubClient VARCHAR(30)
+);
+CREATE TABLE departament (
+	idDepartament INT PRIMARY KEY AUTO_INCREMENT,
+    nameDepartament VARCHAR(50),
+    idCity INT,
+    idCountry INT
+);
+CREATE TABLE city(
+	idCity INT PRIMARY KEY AUTO_INCREMENT,
+    nameCity VARCHAR(50),
+    idCountry INT
+);
+
+CREATE TABLE country(
+	idCountry INT PRIMARY KEY AUTO_INCREMENT,
+    nameCountry VARCHAR(50)
+);
+
+CREATE TABLE typeClient(
+	idTypeC INT PRIMARY KEY AUTO_INCREMENT,
+    nameTypeC VARCHAR(50)
+);
+
+CREATE TABLE warehouse(
+	idWarehouse INT PRIMARY KEY AUTO_INCREMENT,
+    idClient INT,
+    direction VARCHAR(100),
+    idSite INT,
+    idSection INT
+);
+
+CREATE TABLE site(
+	idSite INT PRIMARY KEY AUTO_INCREMENT,
+    nameSite VARCHAR(100)
+);
+
+CREATE TABLE section(
+	idSection INT PRIMARY KEY AUTO_INCREMENT,
+    nameSection VARCHAR(100)
+);
+
+CREATE TABLE sectionProduct(
+	idSectionProduct INT PRIMARY KEY AUTO_INCREMENT,
+    idSection INT,
+    idProduct INT
+);
+
+CREATE TABLE product(
+	idProduct INT PRIMARY KEY AUTO_INCREMENT,
+    idTypeP INT,
+    nameProduct VARCHAR(100),
+    barcode VARCHAR(100),
+    idMeasurement INT,
+    idSectionProduct INT
+);
+
+CREATE TABLE typeProduct(
+	idTypeP INT PRIMARY KEY AUTO_INCREMENT,
+    nameTypeP VARCHAR(50)
+);
+
+CREATE TABLE unityMeasurement(
+	idMeasurement INT PRIMARY KEY AUTO_INCREMENT,
+    typeMeasurement VARCHAR(50)
+);
+
+CREATE TABLE sectorMaster(
+	idSectorMaster INT PRIMARY KEY AUTO_INCREMENT,
+    sectorName VARCHAR(50)
+);
+
+CREATE TABLE userSystem(
+	idUser INT PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(50),
+    userPassword VARCHAR(20),
+    idTypeUser INT
+);
+
+CREATE TABLE typeUser(
+	idTypeUser INT PRIMARY KEY AUTO_INCREMENT,
+    typeUser VARCHAR(50)
+);
+
+CREATE TABLE orderType(
+	idOrderType INT PRIMARY KEY AUTO_INCREMENT,
+    orderType VARCHAR(100)
+);
+
+CREATE TABLE workOrder(
+	idWorkOrder INT PRIMARY KEY AUTO_INCREMENT, 
+    workName VARCHAR(50),
+    idOrderType INT
+);
+
+CREATE TABLE generalActivity(
+	idGeneralActivity INT PRIMARY KEY AUTO_INCREMENT,
+    activityName VARCHAR(50)
+);
+
+CREATE TABLE responseActivity(
+	idResponseActivity INT PRIMARY KEY AUTO_INCREMENT,
+    response VARCHAR(50)
+);
+
+CREATE TABLE orderActivityResponse(
+	idOrderActivtyResponse INT PRIMARY KEY AUTO_INCREMENT,
+    orderActivityResponse VARCHAR(50),
+    idGeneralActivity INT,
+    idResponseActivity INT
+);
+CREATE TABLE formatMaster(
+	idFormatMaster INT PRIMARY KEY AUTO_INCREMENT,
+    formatName VARCHAR(50)
+);
+
+CREATE TABLE physicalTakePolicies(
+	idPhysicalTakePolicies INT PRIMARY KEY AUTO_INCREMENT,
+    policieName VARCHAR(50)
+);
