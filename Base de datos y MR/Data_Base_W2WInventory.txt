@@ -1,0 +1,198 @@
+Create database w2wInventory;
+
+use w2wInventory;
+
+CREATE TABLE client(
+    idClient INT PRIMARY KEY AUTO_INCREMENT,
+    nameClient VARCHAR(50),
+    phoneClient VARCHAR(50),
+    mailClient VARCHAR(50),
+    idTypeC INT,
+    idUser INT,
+    idSectorMaster INT,
+    statusClient VARCHAR(30)
+);
+CREATE TABLE subClient(
+    idSubClient INT PRIMARY KEY AUTO_INCREMENT,
+    Client INT,
+    idCountry INT,
+    idDepartament INT,
+    idCity INT,
+    idWarehouse INT, 
+    statusSubClient VARCHAR(30)
+);
+CREATE TABLE departament (
+    idDepartament INT PRIMARY KEY AUTO_INCREMENT,
+    nameDepartament VARCHAR(50),
+    City INT,
+    Country INT
+);
+CREATE TABLE city(
+    idCity INT PRIMARY KEY AUTO_INCREMENT,
+    nameCity VARCHAR(50),
+    idCoun INT
+);
+
+CREATE TABLE country(
+    idCountry INT PRIMARY KEY AUTO_INCREMENT,
+    nameCountry VARCHAR(50)
+);
+
+CREATE TABLE typeClient(
+    idTypeC INT PRIMARY KEY AUTO_INCREMENT,
+    nameTypeC VARCHAR(50)
+);
+
+CREATE TABLE warehouse(
+    idWarehouse INT PRIMARY KEY AUTO_INCREMENT,
+    idClient INT,
+    direction VARCHAR(100),
+    idSite INT,
+    idSect INT
+);
+
+CREATE TABLE site(
+    idSite INT PRIMARY KEY AUTO_INCREMENT,
+    nameSite VARCHAR(100)
+);
+
+CREATE TABLE section(
+    idSection INT PRIMARY KEY AUTO_INCREMENT,
+    nameSection VARCHAR(100)
+);
+
+CREATE TABLE sectionProduct(
+    idSectionProduct INT PRIMARY KEY AUTO_INCREMENT,
+    idSection INT,
+    idProduct INT
+);
+
+CREATE TABLE product(
+    idProduct INT PRIMARY KEY AUTO_INCREMENT,
+    idTypeP INT,
+    nameProduct VARCHAR(100),
+    barcode VARCHAR(100),
+    idMeasurement INT,
+    idSectionProduct INT
+);
+
+CREATE TABLE typeProduct(
+    idTypeP INT PRIMARY KEY AUTO_INCREMENT,
+    nameTypeP VARCHAR(50)
+);
+
+CREATE TABLE unityMeasurement(
+    idMeasurement INT PRIMARY KEY AUTO_INCREMENT,
+    typeMeasurement VARCHAR(50)
+);
+
+CREATE TABLE sectorMaster(
+    idSectorMaster INT PRIMARY KEY AUTO_INCREMENT,
+    sectorName VARCHAR(50)
+);
+
+CREATE TABLE userSystem(
+    idUser INT PRIMARY KEY AUTO_INCREMENT,
+    userName VARCHAR(50),
+    userPassword VARCHAR(20),
+    idTypeUser INT
+);
+
+CREATE TABLE typeUser(
+    idTypeUser INT PRIMARY KEY AUTO_INCREMENT,
+    typeUser VARCHAR(50)
+);
+
+
+CREATE TABLE orderType(
+    idOrderType INT PRIMARY KEY AUTO_INCREMENT,
+    orderType VARCHAR(100)
+);
+
+CREATE TABLE workOrder(
+    idWorkOrder INT PRIMARY KEY AUTO_INCREMENT, 
+    workName VARCHAR(50),
+    idOrderType INT
+);
+
+CREATE TABLE generalActivity(
+    idGeneralActivity INT PRIMARY KEY AUTO_INCREMENT,
+    activityName VARCHAR(50)
+);
+
+CREATE TABLE responseActivity(
+    idResponseActivity INT PRIMARY KEY AUTO_INCREMENT,
+    response VARCHAR(50)
+);
+
+CREATE TABLE orderActivityResponse(
+    idOrderActivtyResponse INT PRIMARY KEY AUTO_INCREMENT,
+    orderActivityResponse VARCHAR(50),
+    idGeneralActivity INT,
+    idResponseActivity INT
+);
+CREATE TABLE formatMaster(
+    idFormatMaster INT PRIMARY KEY AUTO_INCREMENT,
+    formatName VARCHAR(50)
+);
+
+CREATE TABLE physicalTakePolicies(
+    idPhysicalTakePolicies INT PRIMARY KEY AUTO_INCREMENT,
+    policieName VARCHAR(50)
+);
+
+
+/*relations*/
+
+ALTER TABLE product ADD CONSTRAINT idTypeProduct FOREIGN KEY(idTypeP) REFERENCES typeproduct(idtypeP);
+
+ALTER TABLE product ADD CONSTRAINT idMeasurement FOREIGN KEY(idMeasurement) REFERENCES unityMeasurement(idMeasurement);
+
+ALTER TABLE sectionproduct ADD CONSTRAINT idProduct FOREIGN KEY(idProduct) REFERENCES product(idProduct);
+
+ALTER TABLE sectionproduct ADD CONSTRAINT idSection FOREIGN KEY(idSection) REFERENCES section(idSection);
+
+ALTER TABLE warehouse ADD CONSTRAINT idSect FOREIGN KEY(idSect) REFERENCES section(idSection);
+
+ALTER TABLE warehouse ADD CONSTRAINT idSite FOREIGN KEY(idSite) REFERENCES site(idSite);
+
+ALTER TABLE warehouse ADD CONSTRAINT idClient FOREIGN KEY(idClient) REFERENCES client(idClient);
+
+ALTER TABLE client ADD CONSTRAINT idTypeC FOREIGN KEY (idTypeC) REFERENCES typeclient(idTypeC);
+
+ALTER TABLE client ADD CONSTRAINT idUser FOREIGN KEY (idUser) REFERENCES usersystem(idUser);
+
+ALTER TABLE client ADD CONSTRAINT idSectorMaster FOREIGN KEY (idSectorMaster) REFERENCES sectormaster(idSectorMaster);
+
+ALTER TABLE usersystem ADD CONSTRAINT idUserSystem FOREIGN KEY (idTypeUser) REFERENCES typeuser(idTypeUser);
+
+ALTER TABLE subclient ADD CONSTRAINT Client FOREIGN KEY(Client) REFERENCES client(idClient);
+
+ALTER TABLE subclient ADD CONSTRAINT warehouse FOREIGN KEY(idWareHouse) REFERENCES warehouse(idWareHouse);
+
+ALTER TABLE subclient ADD CONSTRAINT idCity FOREIGN KEY(idCity) REFERENCES city(idCity);
+
+ALTER TABLE subclient ADD CONSTRAINT idDepartament FOREIGN KEY(idDepartament) REFERENCES departament(idDepartament);
+
+ALTER TABLE subclient ADD CONSTRAINT idCountry FOREIGN KEY(idCountry) REFERENCES country(idCountry);
+
+ALTER TABLE departament ADD CONSTRAINT city FOREIGN KEY(City) REFERENCES city(idCity);
+
+ALTER TABLE departament ADD CONSTRAINT country FOREIGN KEY(country) REFERENCES country(idCountry);
+
+ALTER TABLE city ADD CONSTRAINT idCoun FOREIGN KEY(idCoun) REFERENCES country(idCountry);
+
+ALTER TABLE workOrder ADD CONSTRAINT idOrderType FOREIGN KEY(idOrderType) REFERENCES orderType(idOrderType);
+
+ALTER TABLE workOrder ADD CONSTRAINT idSubClient FOREIGN KEY(idSubClient) REFERENCES subclient(idSubClient);
+
+ALTER TABLE orderactivityresponse ADD CONSTRAINT idGeneralActivity FOREIGN KEY(idGeneralActivity) REFERENCES generalactivity(idGeneralActivity);
+
+ALTER TABLE orderactivityresponse ADD CONSTRAINT idWorkOrder FOREIGN KEY(idWorkOrder) REFERENCES workOrder(idWorkOrder);
+
+ALTER TABLE orderactivityresponse ADD CONSTRAINT idResponseActivity FOREIGN KEY(idResponseActivity) REFERENCES responseactivity(idResponseActivity);
+
+
+
+
+
