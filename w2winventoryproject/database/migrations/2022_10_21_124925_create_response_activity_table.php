@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('response_activity', function (Blueprint $table) {
+        Schema::create('responseActivities', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('response_activity');
+        Schema::dropIfExists('responseActivities');
     }
 };

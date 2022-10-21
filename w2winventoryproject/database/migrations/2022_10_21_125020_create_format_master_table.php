@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('format_master', function (Blueprint $table) {
+        Schema::create('formatMasters', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
         });
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('format_master');
+        Schema::dropIfExists('formatMasters');
     }
 };

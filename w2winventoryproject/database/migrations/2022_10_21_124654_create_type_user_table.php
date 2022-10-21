@@ -13,9 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('type_user', function (Blueprint $table) {
+        Schema::create('typeUsers', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
+            $table->string('typeUser');
         });
     }
 
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_user');
+        Schema::dropIfExists('typeUsers');
     }
 };

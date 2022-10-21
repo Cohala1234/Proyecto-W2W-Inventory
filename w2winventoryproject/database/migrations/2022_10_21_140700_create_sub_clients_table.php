@@ -4,7 +4,6 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-
 return new class extends Migration
 {
     /**
@@ -14,11 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('cities', function (Blueprint $table) {
+        Schema::create('subClients', function (Blueprint $table) {
             $table->id();
+            $table->string('statusClient');
             $table->timestamps();
-            $table->string('nameCity')->nulleable();
+
+            $table->foreignId('client_id')->constrained();
             $table->foreignId('country_id')->constrained();
+            $table->foreignId('departament_id')->constrained();
+            $table->foreignId('city_id')->constrained();
+            $table->foreignId('warehouse_id')->constrained();
+
         });
     }
 
@@ -29,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cities');
+        Schema::dropIfExists('subClients');
     }
 };

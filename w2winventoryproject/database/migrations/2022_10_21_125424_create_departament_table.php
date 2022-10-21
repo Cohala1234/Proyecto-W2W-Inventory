@@ -13,8 +13,8 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('departament', function (Blueprint $table) {
-            $table->id('idDepartament');
+        Schema::create('departaments', function (Blueprint $table) {
+            $table->id();
             $table->string('nameDepartament')->nulleable();
             $table->timestamps();
             $table->foreignId('city_id')->constrained();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('departament');
+        Schema::dropIfExists('departaments');
     }
 };

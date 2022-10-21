@@ -13,9 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('type_client', function (Blueprint $table) {
+        Schema::create('typeClients', function (Blueprint $table) {
             $table->id();
+            $table->string('nameTypeClient')->nulleable();
             $table->timestamps();
+
+
         });
     }
 
@@ -26,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_client');
+        Schema::dropIfExists('typeClients');
     }
 };

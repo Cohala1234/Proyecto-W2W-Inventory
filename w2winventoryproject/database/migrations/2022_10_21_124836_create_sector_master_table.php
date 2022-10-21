@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('sector_master', function (Blueprint $table) {
+        Schema::create('sectorMasters', function (Blueprint $table) {
             $table->id();
+            $table->string('sectorName');
             $table->timestamps();
         });
     }
@@ -26,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('sector_master');
+        Schema::dropIfExists('sectorMasters');
     }
 };
