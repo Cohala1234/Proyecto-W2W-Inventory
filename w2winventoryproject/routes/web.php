@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TypeUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,6 +22,20 @@ Route::get('/', function () {
 Route::get('/register', function () {
     return view('auth/register');
 });
+
+
+//TypeUser
+
+Route::resource('typeUser',TypeUserController::class);
+
+/*
+Route::get('/typeUser', function () {
+    return view('typeUser.index');
+});
+Route::get('/typeUser/create',[TypeUserController::class,'create']);
+*/
+//end TypeUser
+
 
 Auth::routes();
 
