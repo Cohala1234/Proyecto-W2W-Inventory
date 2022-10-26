@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\typeClients;
 use Illuminate\Http\Request;
-use App\Models\typeUser;
 
-class TypeUserController extends Controller
+class TypeClientsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,9 @@ class TypeUserController extends Controller
      */
     public function index()
     {
-        $date['typeU']=typeUser::paginate(5);
+        $date['typeC']=typeClients::paginate(5);
         //para retornar la vista
-        return view('typeUser.index', $date);
+        return view('typeClient.index', $date);
     }
 
     /**
@@ -26,9 +26,7 @@ class TypeUserController extends Controller
      */
     public function create()
     {
-        //para retornar la vista
-        return view('typeUser.index');
-        
+        //return view('typeClient.index');
     }
 
     /**
@@ -39,18 +37,18 @@ class TypeUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
-        $dateTypeUser = request()->except('_token');
-        typeUser::insert($dateTypeUser);
-        return view('typeUser.index');
+        $dateTypeClient = request()->except('_token');
+        typeClients::insert($dateTypeClient);
+        return redirect('typeClient')->with('message','El tipo de cliente se registro correctamente');
     }
+
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\typeUser  $typeUser
+     * @param  \App\Models\typeClients  $typeClients
      * @return \Illuminate\Http\Response
      */
-    public function show(typeUser $typeUser)
+    public function show(typeClients $typeClients)
     {
         //
     }
@@ -58,10 +56,10 @@ class TypeUserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\typeUser  $typeUser
+     * @param  \App\Models\typeClients  $typeClients
      * @return \Illuminate\Http\Response
      */
-    public function edit(typeUser $typeUser)
+    public function edit(typeClients $typeClients)
     {
         //
     }
@@ -70,10 +68,10 @@ class TypeUserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\typeUser  $typeUser
+     * @param  \App\Models\typeClients  $typeClients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, typeUser $typeUser)
+    public function update(Request $request, typeClients $typeClients)
     {
         //
     }
@@ -81,10 +79,10 @@ class TypeUserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\typeUser  $typeUser
+     * @param  \App\Models\typeClients  $typeClients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(typeUser $typeUser)
+    public function destroy(typeClients $typeClients)
     {
         //
     }

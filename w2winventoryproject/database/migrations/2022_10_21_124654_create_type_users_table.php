@@ -13,14 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('orderActivityResponses', function (Blueprint $table) {
+        Schema::create('type_users', function (Blueprint $table) {
             $table->id();
-            $table->string('orderActivityResponse')->nulleable();
             $table->timestamps();
-
-            $table->foreignId('generalActivity_id')->constrained();
-            $table->foreignId('responseActivity_id')->constrained();
-            $table->foreignId('workOrder_id')->constrained();
+            $table->string('typeUser');
         });
     }
 
@@ -31,6 +27,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('orderActivityResponses');
+        Schema::dropIfExists('type_users');
     }
 };

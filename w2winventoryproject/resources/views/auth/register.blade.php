@@ -62,10 +62,10 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label for="typeUser_id" class="col-md-4 col-form-label text-md-end">{{__('Type User')}}</label>
+                            <label for="type_users_id" class="col-md-4 col-form-label text-md-end">{{__('Type User')}}</label>
 
                             <div class="col-md-6">
-                                <input id="typeUser_id" type="text" class="form-control" name="typeUser_id" value="{{ old('typeUser_id') }}" required autocomplete="typeUser_id" autofocus>
+                                <input id="type_users_id" type="text" class="form-control" name="type_users_id" value="{{ old('type_users_id') }}" required autocomplete="type_users_id" autofocus>
                             </div>
                         </div>
 

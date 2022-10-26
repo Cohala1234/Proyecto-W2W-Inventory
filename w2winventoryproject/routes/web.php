@@ -1,9 +1,9 @@
 <?php
 
+use App\Http\Controllers\TypeClientsController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeUserController;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,10 +23,12 @@ Route::get('/register', function () {
     return view('auth/register');
 });
 
-
 //TypeUser
 
 Route::resource('typeUser',TypeUserController::class);
+
+//TypeClient
+Route::resource('typeClient', TypeClientsController::class);
 
 /*
 Route::get('/typeUser', function () {
@@ -35,7 +37,6 @@ Route::get('/typeUser', function () {
 Route::get('/typeUser/create',[TypeUserController::class,'create']);
 */
 //end TypeUser
-
 
 Auth::routes();
 
