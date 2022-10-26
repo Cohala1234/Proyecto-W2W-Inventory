@@ -24,7 +24,7 @@ Route::get('/register', function () {
 
 //TypeUser
 
-Route::resource('typeUser',TypeUserController::class);
+Route::resource('typeUser',TypeUserController::class)->middleware('auth');
 
 /*
 Route::get('/typeUser', function () {
