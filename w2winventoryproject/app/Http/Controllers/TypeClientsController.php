@@ -71,11 +71,11 @@ class TypeClientsController extends Controller
      * @param  \App\Models\typeClients  $typeClients
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, typeClients $typeClients)
+    public function update(Request $request, $id)
     {
         //
         $dateTypeClient = request()->except(['_token','_method']);
-        typeClient::where('id','=',$id)->update($dateTypeClient);
+        typeClients::where('id','=',$id)->update($dateTypeClient);
         return redirect('typeClient')->with('message','El registro se actualizo correctamente');
     }
 
