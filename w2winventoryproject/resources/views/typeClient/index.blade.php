@@ -56,6 +56,7 @@
                     <td>Editar | Eliminar</td>
                 </tr>
                 @endforeach
+                
             </tbody>
         </table>
         <!-- End Table with hoverable rows -->

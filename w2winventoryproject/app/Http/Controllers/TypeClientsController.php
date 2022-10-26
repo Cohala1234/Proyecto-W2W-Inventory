@@ -14,7 +14,7 @@ class TypeClientsController extends Controller
      */
     public function index()
     {
-        $date['typeC']=typeClients::paginate(5);
+        $date['typeC']=typeClients::orderBy('id')->paginate(5);;
         //para retornar la vista
         return view('typeClient.index', $date);
     }
