@@ -1,14 +1,15 @@
 @extends('layouts.general')
 
 @section('content')
+        <link >
         <div class="card">
             <div class="card-body">
-              <h3 class="card-title">Paises</h3>
+              <h3 id="tittle_C" class="card-title">Paises</h3>
               <!-- Button trigger modal -->
-                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Crear pais</button>
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Nuevo país</button>
 
                 <!-- Modal -->
-                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal fade  m" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
@@ -18,7 +19,7 @@
                             <form action="{{ url('/country') }}" method="POST">
                                 <div class="modal-body">
                                     @csrf
-                                        <label for="nameCountry">nombre país:</label>
+                                        <label for="nameCountry">Nombre del país:</label>
                                         <input type="text" name="nameCountry">
                                 </div>
                                 <div class="modal-footer">

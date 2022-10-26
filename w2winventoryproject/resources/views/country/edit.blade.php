@@ -8,9 +8,9 @@
                   <!-- linea de seguridad -->
                     @csrf
                  <!-- metodo editar -->   {{ method_field('PUT') }}
-                        <div class="col-8">
-                              <h1>Actualizar:</h1>
-                            <label for="nameCountry" class="form-label">Pais</label>
+                        <div class="col-8" >
+                              <h1 id="edit_tittle">Actualizar país</h1>
+                            <label for="nameCountry" class="form-label">País</label>
                             <input type="text" class="form-control" id="inputNanme4" name="nameCountry" value="{{ $nameCedit->nameCountry }}">
                         </div>
                 </div>
