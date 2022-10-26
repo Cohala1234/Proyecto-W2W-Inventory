@@ -74,6 +74,9 @@ class TypeClientsController extends Controller
     public function update(Request $request, typeClients $typeClients)
     {
         //
+        $dateTypeClient = request()->except(['_token','_method']);
+        typeClient::where('id','=',$id)->update($dateTypeClient);
+        return redirect('typeClient')->with('message','El registro se actualizo correctamente');
     }
 
     /**

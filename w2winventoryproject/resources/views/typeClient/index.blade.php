@@ -53,7 +53,7 @@
                 <tr>
                     <th scope="row">{{$tyC->id}}</th>
                     <td>{{$tyC->typeClient}}</td>
-                    <td>Editar | Eliminar</td>
+                    <a href="{{ url('/typeCLient/'.$tyC->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
                 </tr>
                 @endforeach
                 
