@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TypeUserController;
+use App\Http\Controllers\TypeClientsController;
+use App\Http\Controllers\UnityMeasurementController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -25,23 +27,25 @@ Route::get('/register', function () {
 //TypeUser
 
 Route::resource('typeUser',TypeUserController::class)->middleware('auth');
-
-/*
-Route::get('/typeUser', function () {
-    return view('typeUser.index');
-});
-Route::get('/typeUser/create',[TypeUserController::class,'create']);
-*/
 //end TypeUser
 
+
+//TypeClient
+Route::resource('typeClient', TypeClientsController::class)->middleware('auth');
+//endTypeClient
+
+//UnityMeasurement
+Route::resource('unityMeasurement', UnityMeasurementController::class)->middleware('auth');
+//endUnityMeasurement
+
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('auth');

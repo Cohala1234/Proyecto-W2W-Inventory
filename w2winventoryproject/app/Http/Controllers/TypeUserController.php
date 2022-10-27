@@ -63,8 +63,8 @@ class TypeUserController extends Controller
     public function edit($id)
     {
         //
-        //$tyUEdit=typeUser::findOrFail($id);
-        //return view('typeUser.edit', compact('tyUEdit'));
+        $tyUEdit=typeUser::findOrFail($id);
+        return view('typeUser.edit', compact('tyUEdit'));
     }
 
     /**

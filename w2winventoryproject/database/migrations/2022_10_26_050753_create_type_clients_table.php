@@ -1,3 +1,5 @@
+
+
 <?php
 
 use Illuminate\Database\Migrations\Migration;
@@ -13,10 +15,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('unity_measurements', function (Blueprint $table) {
+        Schema::create('type_clients', function (Blueprint $table) {
             $table->id();
             $table->timestamps();
-            $table->string('typeMeasurement');
+            $table->string('typeClient');
         });
     }
 
@@ -27,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('unity_measurements');
+        Schema::dropIfExists('type_clients');
     }
 };
