@@ -14,7 +14,7 @@ class TypeUserController extends Controller
      */
     public function index()
     {
-        $date['typeU']=typeUser::paginate(5);
+        $date['typeU']=typeUser::paginate(8);
         //para retornar la vista
         return view('typeUser.index', $date);
     }
@@ -27,8 +27,7 @@ class TypeUserController extends Controller
     public function create()
     {
         //para retornar la vista
-        return view('typeUser.index');
-        
+        //return view('typeUser.index');
     }
 
     /**
@@ -39,10 +38,10 @@ class TypeUserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //save db
         $dateTypeUser = request()->except('_token');
         typeUser::insert($dateTypeUser);
-        return view('typeUser.index');
+        return redirect('typeUser')->with('message','El registro se creo correctamente');
     }
     /**
      * Display the specified resource.
@@ -61,9 +60,11 @@ class TypeUserController extends Controller
      * @param  \App\Models\typeUser  $typeUser
      * @return \Illuminate\Http\Response
      */
-    public function edit(typeUser $typeUser)
+    public function edit($id)
     {
         //
+        $tyUEdit=typeUser::findOrFail($id);
+        return view('typeUser.edit', compact('tyUEdit'));
     }
 
     /**
@@ -73,9 +74,12 @@ class TypeUserController extends Controller
      * @param  \App\Models\typeUser  $typeUser
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, typeUser $typeUser)
+    public function update(Request $request, $id)
     {
-        //
+        //save db
+        $dateTypeUser = request()->except(['_token','_method']);
+        typeUser::where('id','=',$id)->update($dateTypeUser);
+        return redirect('typeUser')->with('message','El registro se actualizo correctamente');
     }
 
     /**

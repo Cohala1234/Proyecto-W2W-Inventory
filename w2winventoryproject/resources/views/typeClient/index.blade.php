@@ -3,7 +3,14 @@
 @section('content') 
         <div class="card">
             <div class="card-body">
-              <h5 class="card-title">Tipo Clientes</h5>
+                <h5 class="card-title">Tipo Clientes</h5>
+                @if(Session::has('message'))
+
+                    <div class="alert alert-success" role="alert">
+                        {{ Session::get('message')}}
+                    </div>
+
+                @endif
               <!-- Button trigger modal -->
                 <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Crear tipo cliente</button>
 
@@ -18,8 +25,10 @@
                             <form action="{{ url('/typeClient') }}" method="POST">
                                 <div class="modal-body">
                                     @csrf
-                                        <label for="typeClient">Tipo Cliente</label>
-                                        <input type="text" name="typeClient">
+                                    <div class="col-12">
+                                        <label for="typeClient" class="form-label">Tipo Cliente</label>
+                                        <input type="text" class="form-control" id="inputNanme4" name="typeClient">
+                                    </div>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -29,38 +38,29 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Table with hoverable rows -->
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo Cliente</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($typeC as $tyC)
+                        <tr>
+                            <td>{{$tyC->typeClient}}</td>
+                            <td>
+                                <a href="{{ url('/typeClient/'.$tyC->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
+                            </td>
+                        </tr>
+                        @endforeach
+                        
+                    </tbody>
+                </table>
+                <!-- End Table with hoverable rows -->
+
             </div>
         </div>
-        @if(Session::has('message'))
-        <div class="alert alert-success" role="alert">
-            {{ Session::get('message')}}
-          </div>
-        @endif
-
-        
-
-        <!-- Table with hoverable rows -->
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                <th scope="col">Id</th>
-                <th scope="col">Tipo Cliente</th>
-                <th scope="col">Acciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach($typeC as $tyC)
-                <tr>
-                    <th scope="row">{{$tyC->id}}</th>
-                    <td>{{$tyC->typeClient}}</td>
-                    <a href="{{ url('/typeCLient/'.$tyC->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
-                </tr>
-                @endforeach
-                
-            </tbody>
-        </table>
-        <!-- End Table with hoverable rows -->
-
-    </div>
-</div>
 @endsection

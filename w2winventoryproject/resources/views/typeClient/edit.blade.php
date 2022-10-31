@@ -9,7 +9,7 @@
                     {{ method_field('PUT') }}
                         <div class="col-8">
                             <label for="typeClient" class="form-label">Tipo Cliente</label>
-                            <input type="text" class="form-control" id="inputNanme4" name="typeClient" value="{{ $tyCEdit->typeUser }}">
+                            <input type="text" class="form-control" id="inputNanme4" name="typeClient" value="{{ $tyCEdit->typeClient }}">
                         </div>
                 </div>
                 <div class="modal-footer">
