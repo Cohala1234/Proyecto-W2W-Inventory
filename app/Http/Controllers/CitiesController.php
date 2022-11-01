@@ -67,7 +67,7 @@ class CitiesController extends Controller
      * @param  \App\Models\cities  $cities
      * @return \Illuminate\Http\Response
      */
-    public function edit(cities $id)
+    public function edit($id)
     {
         //
         $naCEdit=cities::findOrFail($id);
