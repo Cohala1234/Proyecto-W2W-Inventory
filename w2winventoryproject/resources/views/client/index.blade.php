@@ -22,7 +22,6 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <form action="{{ url('/client') }}" method="POST">
-                            
                             <div class="modal-body">
                                 @csrf
                                     <div class="col-12">
@@ -55,7 +54,6 @@
                                         <label for="sector_master_id" class="form-label">Sector</label>
                                         <input type="text" class="form-control" id="inputNanme4" name="sector_master_id">
                                     </div>
-                                
                                     
                             </div>
                             <div class="modal-footer">
@@ -65,37 +63,40 @@
                         </form>
                     </div>
                 </div>
-            </div>
-            
+            </div>           
             <!-- Table with hoverable rows -->
-          
+            <div class="row">
             @foreach($client as $cl)
+            
 
-                            <div class="row row-cols-1 row-cols-md-3 g-4">
-                <div class="col">
-                    <div class="card">
-                    <img src="..." class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">{{$cl->nameClient}}</h5>
-                        <p class="card-text">{{$cl->phoneClient}}</p>
-                        <p class="card-text">{{$cl->mailClient}}</p>
-                        <p class="card-text">{{$cl->type_client_id}}</p>
-                        <p class="card-text">{{$cl->user_id}}</p>
-                        <p class="card-text">{{$cl->sector_master_id}}</p>
-                        <div class="card-footer">
-                    <a href="{{ url('/client/'.$cl->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
-                    </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-          
-             @endforeach
+                        <div class="card mb-3" style="max-width: 540px;">
+                            <div class="row g-0" id="card_">
+                                <div class="col-md-4">
+                                    <img src="./card.jpg" class="img-fluid rounded-start" alt="...">
+                                </div>
+                                <div class="col-md-8" >
+                                    <div class="card-body">
+                                    <h5 class="card-title">{{$cl->nameClient}}</h5> 
+                                        <a>button</a>
+                                    </div>         
+                                </div>
+                            </div>
+                        </div>
                 
-                
+                        <!--<div class="card-footer bg-transparent border-dark">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item">{{$cl->phoneClient}}</li>
+                                <li class="list-group-item">{{$cl->mailClient}}</li>
+                                <li class="list-group-item">{{$cl->type_client_id}}</li>
+                                <li class="list-group-item">{{$cl->user_id}}</li>
+                                <li class="list-group-item">{{$cl->sector_master_id}}</li>
+                            </ul>
+                            <a href="{{ url('/client/'.$cl->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
+                        </div>-->
+            @endforeach     
             {!! $client->links() !!}
+        </div>
             <!-- End Table with hoverable rows -->
-
         </div>
     </div>
 @endsection

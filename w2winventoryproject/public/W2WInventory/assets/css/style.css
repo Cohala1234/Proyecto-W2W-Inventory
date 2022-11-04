@@ -58,7 +58,19 @@ h6 {
 .pagetitle {
   margin-bottom: 10px;
 }
-
+.row{
+  padding: 5%;
+  gap: 5%;
+  
+}
+.mb-3{
+  max-width: 20em !important;
+  margin-bottom: 5% !important;
+}
+#card_{
+  display: flex ;
+  flex-wrap: nowrap !important;
+}
 .pagetitle h1 {
   font-size: 24px;
   margin-bottom: 0;
@@ -152,6 +164,9 @@ h6 {
 .dropdown-menu .dropdown-item:hover {
   background-color: #f6f9ff;
 }
+#list_client{
+  width: 100%;
+}
 
 @media (min-width: 768px) {
   .dropdown-menu-arrow::before {
@@ -233,12 +248,6 @@ h6 {
 }
 
 /* Card */
-.card {
-  margin-bottom: 30px;
-  border: none;
-  border-radius: 5px;
-  box-shadow: 0px 0 30px rgba(1, 41, 112, 0.1);
-}
 
 .card-header,
 .card-footer {
