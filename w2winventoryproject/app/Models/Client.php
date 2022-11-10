@@ -16,6 +16,7 @@ class Client extends Model
         'nameClient',
         'phoneClient',
         'mailClient',
+        'imageClient',
         'type_client_id',
         'user_id',
         'sector_master_id'

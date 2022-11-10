@@ -41,7 +41,11 @@
 
                                     <div class="col-12">
                                         <label for="type_client_id" class="form-label">Tipo de cliente</label>
-                                        <input type="text" class="form-control" id="inputNanme4" name="type_client_id">
+                                        <select name="type_client_id" id="type_client_id">
+                                            @foreach($typeClient as $typeC)
+                                            <option value="{{$typeC->id}}">{{$typeC->typeClient}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div class="col-12">
@@ -53,6 +57,10 @@
                                     <div class="col-12">
                                         <label for="sector_master_id" class="form-label">Sector</label>
                                         <input type="text" class="form-control" id="inputNanme4" name="sector_master_id">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="imageClient" class="form-label">Foto Imagen</label>
+                                        <input type="file" class="form-control" id="inputNanme4" name="imageClient">
                                     </div>
                                     
                             </div>
@@ -71,9 +79,15 @@
 
                         <div class="card mb-3" style="max-width: 540px;">
                             <div class="row g-0" id="card_">
-                                <div class="col-md-4">
-                                    <img src="./card.jpg" class="img-fluid rounded-start" alt="...">
-                                </div>
+                                @if($cl->imageClient === null)
+                                    <div class="col-md-4">
+                                        <img src="{{asset('img/card.jpg')}}" class="img-fluid rounded-start" alt="Imagen Cliente">
+                                    </div>
+                                @else 
+                                    <div class="col-md-4">
+                                        <img src="{{asset('img/'.$cl->imageClient)}}" class="img-fluid rounded-start" alt="Imagen Cliente">
+                                    </div>
+                                @endif
                                 <div class="col-md-8" >
                                     <div class="card-body">
                                     <h5 class="card-title">{{$cl->nameClient}}</h5> 

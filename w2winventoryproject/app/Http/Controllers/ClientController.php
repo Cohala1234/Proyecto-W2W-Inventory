@@ -50,7 +50,18 @@ class ClientController extends Controller
         $typeClient=typeClients::all();
         $user=User::all();
         $sectorMaster=SectorMaster::all();
+
+        if($imagen = $request->file('imageClient')){
+            $rutaGuardarImg = 'public/img/';
+            $imagenCliente = date('YmdHis').".".$imagen->getClientOriginalExtension();
+            $imagen->move($rutaGuardarImg,$imagenCliente);
+            $client['imageClient']= "$imagenCliente";
+        }
+        var_dump($client['imageClient']);
+
         Client::insert($client);
+
+        //return response()->json($client);
 
         return redirect('client')->with('typeClient',$typeClient)
             ->with('user',$user)
