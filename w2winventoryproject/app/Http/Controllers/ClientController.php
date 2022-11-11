@@ -69,10 +69,10 @@ class ClientController extends Controller
         }
         Client::insert($client);
 
-        return redirect('client')->with('typeClient',$typeClient)
+        return redirect('client')
+            ->with('typeClient',$typeClient)
             ->with('user',$user)
-            ->with('sectorMaster',$sectorMaster)
-            ->with(var_dump($client['imageClient']));
+            ->with('sectorMaster',$sectorMaster);
     }
 
     /**

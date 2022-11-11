@@ -41,7 +41,7 @@
 
                                     <div class="col-12">
                                         <label for="type_client_id" class="form-label">Tipo de cliente</label>
-                                        <select name="type_client_id" id="type_client_id">
+                                        <select name="type_client_id" id="type_client_id" class="form-select">
                                             @foreach($typeClient as $typeC)
                                             <option value="{{$typeC->id}}">{{$typeC->typeClient}}</option>
                                             @endforeach
