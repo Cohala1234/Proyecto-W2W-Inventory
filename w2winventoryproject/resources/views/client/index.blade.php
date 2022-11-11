@@ -21,7 +21,7 @@
                             <h5 class="modal-title" id="staticBackdropLabel">Crear Clientes</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ url('/client') }}" method="POST">
+                        <form action="{{ route('client.store') }}" method="POST" enctype="multipart/form-data">
                             <div class="modal-body">
                                 @csrf
                                     <div class="col-12">
@@ -81,11 +81,11 @@
                             <div class="row g-0" id="card_">
                                 @if($cl->imageClient === null)
                                     <div class="col-md-4">
-                                        <img src="{{asset('img/card.jpg')}}" class="img-fluid rounded-start" alt="Imagen Cliente">
+                                        <img src="public/img/card.jpg" class="img-fluid rounded-start" alt="Imagen Cliente">
                                     </div>
                                 @else 
                                     <div class="col-md-4">
-                                        <img src="{{asset('img/'.$cl->imageClient)}}" class="img-fluid rounded-start" alt="Imagen Cliente">
+                                        <img src="public/img/{{$cl->imageClient}}" class="img-fluid rounded-start" alt="Imagen Cliente">
                                     </div>
                                 @endif
                                 <div class="col-md-8" >

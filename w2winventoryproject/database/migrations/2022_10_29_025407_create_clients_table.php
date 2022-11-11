@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nameClient');
             $table->string('phoneClient');
             $table->string('mailClient');
-            $table->string('imageClient');
+            $table->string('imageClient')->nullable();
             $table->timestamps();
 
             $table->foreignId('type_client_id')->constrained();

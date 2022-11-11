@@ -6,6 +6,8 @@ use App\Models\Client;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
+use Illuminate\Support\Facades\Storage;
+
 use App\Models\typeClients;
 use App\Models\User;
 use App\Models\SectorMaster;
@@ -51,21 +53,26 @@ class ClientController extends Controller
         $user=User::all();
         $sectorMaster=SectorMaster::all();
 
-        if($imagen = $request->file('imageClient')){
+        /*if($imagen = $request->file('imageClient')){
             $rutaGuardarImg = 'public/img/';
             $imagenCliente = date('YmdHis').".".$imagen->getClientOriginalExtension();
             $imagen->move($rutaGuardarImg,$imagenCliente);
             $client['imageClient']= "$imagenCliente";
+        }*/
+
+        if($imagen = $request->file('imageClient')){
+            $rutaGuardarImg = $request->file('imageClient')->store('public/img');
+            $imagenCliente = date('YmdHis').".".$imagen->getClientOriginalName();
+            $imagen->move($rutaGuardarImg, $imagenCliente);
+            $client['imageClient']="$imagenCliente";
+
         }
-        var_dump($client['imageClient']);
-
         Client::insert($client);
-
-        //return response()->json($client);
 
         return redirect('client')->with('typeClient',$typeClient)
             ->with('user',$user)
-            ->with('sectorMaster',$sectorMaster);
+            ->with('sectorMaster',$sectorMaster)
+            ->with(var_dump($client['imageClient']));
     }
 
     /**
