@@ -85,7 +85,7 @@
                                     </div>
                                 @else 
                                     <div class="col-md-4">
-                                        <img src="public/img/{{$cl->imageClient}}" class="img-fluid rounded-start" alt="Imagen Cliente">
+                                        <img src="{{asset('img/'.$cl->imageClient)}}" class="img-fluid rounded-start" alt="Imagen Cliente">
                                     </div>
                                 @endif
                                 <div class="col-md-8" >
@@ -107,8 +107,7 @@
                             </ul>
                             <a href="{{ url('/client/'.$cl->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
                         </div>-->
-            @endforeach     
-            {!! $client->links() !!}
+            @endforeach   
         </div>
             <!-- End Table with hoverable rows -->
         </div>

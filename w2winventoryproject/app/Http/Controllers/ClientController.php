@@ -21,10 +21,10 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $date['client']=Client::paginate(8);
-        $typeClient['typeClient']=typeClients::paginate(8);
-        $user['user']=User::paginate(8);
-        $sectorMaster['sectorMaster']=SectorMaster::paginate(8);
+        $date['client']=Client::all();
+        $typeClient['typeClient']=typeClients::all();
+        $user['user']=User::all();
+        $sectorMaster['sectorMaster']=SectorMaster::all();
 
         return view('client.index', $date,$typeClient,$user,$sectorMaster);
     }
@@ -53,20 +53,18 @@ class ClientController extends Controller
         $user=User::all();
         $sectorMaster=SectorMaster::all();
 
-        /*if($imagen = $request->file('imageClient')){
-            $rutaGuardarImg = 'public/img/';
-            $imagenCliente = date('YmdHis').".".$imagen->getClientOriginalExtension();
-            $imagen->move($rutaGuardarImg,$imagenCliente);
-            $client['imageClient']= "$imagenCliente";
-        }*/
+        //Con $nombre_Archivo se trae el nombre del archivo que sube el usuario
+        //usamos $archivo se toma la imagen que subio el usuario
+        //luego con $ruta se indica que lo guarde en la carpeta public dentro de img( sin crear una carpeta nueva por cada imagen)
+        //Posteriormente se le indica a la variable archivo donde debe guardar la imagen que recibio
 
-        if($imagen = $request->file('imageClient')){
-            $rutaGuardarImg = $request->file('imageClient')->store('public/img');
-            $imagenCliente = date('YmdHis').".".$imagen->getClientOriginalName();
-            $imagen->move($rutaGuardarImg, $imagenCliente);
-            $client['imageClient']="$imagenCliente";
+            $nombre_Archivo = $request->imageClient->getClientoriginalName();
+            $archivo = $request->imageClient;
 
-        }
+            $ruta = public_path(). '/img';
+            $archivo->move($ruta, $nombre_Archivo);
+
+            $client['imageClient']= $nombre_Archivo;
         Client::insert($client);
 
         return redirect('client')
