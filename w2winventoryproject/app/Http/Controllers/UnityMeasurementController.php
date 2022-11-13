@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\unityMeasurement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UnityMeasurementController extends Controller
 {
@@ -14,9 +15,17 @@ class UnityMeasurementController extends Controller
      */
     public function index()
     {
-        $date['unityM']=unityMeasurement::paginate(8);
+        /*$date['unityM']=unityMeasurement::paginate(8);*/
         //para retornar la vista
-        return view('unityMeasurement.index', $date);
+        return view('unityMeasurement.index');
+    }
+
+    public function fetchunitymeasurement()
+    {
+        $unityMeasurements = unityMeasurement::all();
+        return response()->json([
+            'unityMeasurements'=>$unityMeasurements,
+        ]);
     }
 
     /**
@@ -37,10 +46,33 @@ class UnityMeasurementController extends Controller
      */
     public function store(Request $request)
     {
-        //save db
-        $dateUnityMeasurement = request()->except('_token');
-        unityMeasurement::insert($dateUnityMeasurement);
-        return redirect('unityMeasurement')->with('message','El registro se creo correctamente');
+        $reglas = [
+            "typeMeasurement" => 'required|alpha',
+        ];
+        $mensajes = [
+            "required" => "Campo Obligatorio",
+            "alpha" => "Permitido solo letras",
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }
+        else
+        {
+            $tMeasurement = new unityMeasurement;
+            $tMeasurement->typeMeasurement = $request->input('typeMeasurement');
+            $tMeasurement->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'El registro se creo correctamente',
+            ]);
+        }
     }
 
     /**
@@ -63,8 +95,21 @@ class UnityMeasurementController extends Controller
     public function edit($id)
     {
         //
-        $unityMEdit=unityMeasurement::findOrFail($id);
-        return view('unityMeasurement.edit', compact('unityMEdit'));
+        $unityMeasurement = unityMeasurement::find($id);
+        if ($unityMeasurement) 
+        {
+            return response()->json([
+                'status'=>200,
+                'unityMeasurement'=>$unityMeasurement,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'Unidad de medida no encontrada',
+            ]);
+        }
     }
 
     /**
@@ -76,10 +121,43 @@ class UnityMeasurementController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //save db
-        $dateUnityMeasurement = request()->except(['_token','_method']);
-        unityMeasurement::where('id','=',$id)->update($dateUnityMeasurement);
-        return redirect('unityMeasurement')->with('message','El registro se actualizo correctamente');
+        $reglas = [
+            "typeMeasurement" => 'required|alpha',
+        ];
+        $mensajes = [
+            "required" => "Campo Obligatorio",
+            "alpha" => "Permitido solo letras",
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }
+        else
+        {
+            $tMeasurement = unityMeasurement::find($id);
+            if ($tMeasurement) 
+            {
+                $tMeasurement->typeMeasurement = $request->input('typeMeasurement');
+                $tMeasurement->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'El registro se actualizo correctamente',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'Unidad de medida no encontrada',
+                ]);
+            }
+        }
     }
 
     /**
@@ -88,8 +166,13 @@ class UnityMeasurementController extends Controller
      * @param  \App\Models\unityMeasurement  $unityMeasurement
      * @return \Illuminate\Http\Response
      */
-    public function destroy(unityMeasurement $unityMeasurement)
+    public function destroy($id)
     {
-        //
+        $tMeasurement = unityMeasurement::find($id);
+        $tMeasurement->delete();
+        return response()->json([
+            'status'=>200,
+            'message'=>'El registro se elimino correctamente',
+        ]);
     }
 }

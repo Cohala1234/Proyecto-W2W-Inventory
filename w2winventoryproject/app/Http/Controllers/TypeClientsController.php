@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\typeClients;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class TypeClientsController extends Controller
 {
@@ -14,9 +15,17 @@ class TypeClientsController extends Controller
      */
     public function index()
     {
-        $date['typeC']=typeClients::paginate(5);;
+        /*$date['typeC']=typeClients::paginate(5);*/
         //para retornar la vista
-        return view('typeClient.index', $date);
+        return view('typeClient.index');
+    }
+
+    public function fetchtypeclients()
+    {
+        $typeClients = typeClients::all();
+        return response()->json([
+            'typeClients'=>$typeClients,
+        ]);
     }
 
     /**
@@ -37,9 +46,33 @@ class TypeClientsController extends Controller
      */
     public function store(Request $request)
     {
-        $dateTypeClient = request()->except('_token');
-        typeClients::insert($dateTypeClient);
-        return redirect('typeClient')->with('message','El tipo de cliente se registro correctamente');
+        $reglas = [
+            "typeClient" => 'required|alpha',
+        ];
+        $mensajes = [
+            "required" => "Campo Obligatorio",
+            "alpha" => "Permitido solo letras",
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }
+        else
+        {
+            $typeCli = new typeClients;
+            $typeCli->typeClient = $request->input('typeClient');
+            $typeCli->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'El registro se creo correctamente',
+            ]);
+        }
     }
 
     /**
@@ -62,8 +95,21 @@ class TypeClientsController extends Controller
     public function edit($id)
     {
         //
-        $tyCEdit=typeClients::findOrFail($id);
-        return view('typeClient.edit', compact('tyCEdit'));
+        $typeClient = typeClients::find($id);
+        if ($typeClient) 
+        {
+            return response()->json([
+                'status'=>200,
+                'typeClient'=>$typeClient,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'Tipo cliente no encontrado',
+            ]);
+        }
     }
 
     /**
@@ -75,10 +121,43 @@ class TypeClientsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-        $dateTypeClient = request()->except(['_token','_method']);
-        typeClients::where('id','=',$id)->update($dateTypeClient);
-        return redirect('typeClient')->with('message','El registro se actualizo correctamente');
+        $reglas = [
+            "typeClient" => 'required|alpha',
+        ];
+        $mensajes = [
+            "required" => "Campo Obligatorio",
+            "alpha" => "Permitido solo letras",
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }
+        else
+        {
+            $typeCli = typeClients::find($id);
+            if ($typeCli) 
+            {
+                $typeCli->typeClient = $request->input('typeClient');
+                $typeCli->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'El registro se actualizo correctamente',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'Tipo cliente no encontrado',
+                ]);
+            }
+        }
     }
 
     /**
@@ -87,8 +166,13 @@ class TypeClientsController extends Controller
      * @param  \App\Models\typeClients  $typeClients
      * @return \Illuminate\Http\Response
      */
-    public function destroy(typeClients $typeClients)
+    public function destroy($id)
     {
-        //
+        $typeCli = typeClients::find($id);
+        $typeCli->delete();
+        return response()->json([
+            'status'=>200,
+            'message'=>'El registro se elimino correctamente',
+        ]);
     }
 }

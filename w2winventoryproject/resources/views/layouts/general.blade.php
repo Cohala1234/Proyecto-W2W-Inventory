@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
   <meta charset="utf-8">
@@ -29,6 +29,9 @@
 
   <!-- Template Main CSS File -->
   <link href="{{ asset('W2WInventory/assets/css/style.css') }}" rel="stylesheet">
+
+  <!-- CSRF token -->
+  <meta name="csrf-token" content="{{ csrf_token() }}">
 
 </head>
 
@@ -119,7 +122,7 @@
         </a>
       </li><!-- End Dashboard Nav -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-menu-button-wide"></i><span>Components</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -195,9 +198,9 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Components Nav -->
+      </li> End Components Nav -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#forms-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-journal-text"></i><span>Forms</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -223,7 +226,7 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Forms Nav -->
+      </li> End Forms Nav -->
 
       <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#tables-nav" data-bs-toggle="collapse" href="#">
@@ -245,10 +248,30 @@
               <i class="bi bi-circle"></i><span>Tipo usuarios</span>
             </a>
           </li>
+          <li>
+            <a href="{{ url('/country') }}">
+              <i class="bi bi-circle"></i><span>Paises</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url('/city') }}">
+              <i class="bi bi-circle"></i><span>Ciudades</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url('/departament') }}">
+              <i class="bi bi-circle"></i><span>Departamentos</span>
+            </a>
+          </li>
+          <li>
+            <a href="{{ url('/typeProduct') }}">
+              <i class="bi bi-circle"></i><span>Tipo producto</span>
+            </a>
+          </li>
         </ul>
       </li><!-- End Tables Nav -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#charts-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-bar-chart"></i><span>Charts</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -269,9 +292,9 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Charts Nav -->
+      </li> End Charts Nav -->
 
-      <li class="nav-item">
+      <!-- <li class="nav-item">
         <a class="nav-link collapsed" data-bs-target="#icons-nav" data-bs-toggle="collapse" href="#">
           <i class="bi bi-gem"></i><span>Icons</span><i class="bi bi-chevron-down ms-auto"></i>
         </a>
@@ -292,58 +315,86 @@
             </a>
           </li>
         </ul>
-      </li><!-- End Icons Nav -->
+      </li>End Icons Nav -->
 
       <li class="nav-heading">Pages</li>
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="users-profile.html">
+        <a class="nav-link collapsed" href="{{ url('/section') }}">
           <i class="bi bi-person"></i>
-          <span>Profile</span>
+          <span>Sección</span>
         </a>
       </li><!-- End Profile Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-faq.html">
+        <a class="nav-link collapsed" href="{{ url('/product') }}">
           <i class="bi bi-question-circle"></i>
-          <span>F.A.Q</span>
+          <span>Producto</span>
         </a>
       </li><!-- End F.A.Q Page Nav -->
 
       <li class="nav-item">
-        <a class="nav-link collapsed" href="pages-contact.html">
+        <a class="nav-link collapsed" href="{{ url('/site') }}">
+          <i class="bi bi-question-circle"></i>
+          <span>Sitios</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('/sectionProduct') }}">
+          <i class="bi bi-question-circle"></i>
+          <span>Sección del Producto</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('/client') }}">
           <i class="bi bi-envelope"></i>
-          <span>Contact</span>
+          <span>Cliente</span>
         </a>
       </li><!-- End Contact Page Nav -->
 
       <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('/sectorMaster') }}">
+          <i class="bi bi-question-circle"></i>
+          <span>Sector Master</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="{{ url('/warehouse') }}">
+          <i class="bi bi-question-circle"></i>
+          <span>Almacenes</span>
+        </a>
+      </li><!-- End F.A.Q Page Nav -->
+
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" href="pages-register.html">
           <i class="bi bi-card-list"></i>
           <span>Register</span>
         </a>
-      </li><!-- End Register Page Nav -->
+      </li> End Register Page Nav -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" href="pages-login.html">
           <i class="bi bi-box-arrow-in-right"></i>
           <span>Login</span>
         </a>
-      </li><!-- End Login Page Nav -->
+      </li> End Login Page Nav -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" href="pages-error-404.html">
           <i class="bi bi-dash-circle"></i>
           <span>Error 404</span>
         </a>
-      </li><!-- End Error 404 Page Nav -->
+      </li> End Error 404 Page Nav -->
 
-      <li class="nav-item">
+      <!--<li class="nav-item">
         <a class="nav-link collapsed" href="pages-blank.html">
           <i class="bi bi-file-earmark"></i>
           <span>Blank</span>
         </a>
-      </li><!-- End Blank Page Nav -->
+      </li> End Blank Page Nav -->
 
     </ul>
 
@@ -356,18 +407,18 @@
   </main><!-- End #main -->
 
   <!-- ======= Footer ======= -->
-  <footer id="footer" class="footer">
+  <!--<footer id="footer" class="footer">
     <div class="copyright">
       &copy; Copyright <strong><span>NiceAdmin</span></strong>. All Rights Reserved
     </div>
     <div class="credits">
-      <!-- All the links in the footer should remain intact. -->
-      <!-- You can delete the links only if you purchased the pro version. -->
-      <!-- Licensing information: https://bootstrapmade.com/license/ -->
-      <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+      All the links in the footer should remain intact. 
+      You can delete the links only if you purchased the pro version. 
+      Licensing information: https://bootstrapmade.com/license/ 
+      Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ 
       Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
     </div>
-  </footer><!-- End Footer -->
+  </footer> End Footer -->
 
   <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
@@ -383,6 +434,11 @@
 
   <!-- Template Main JS File -->
   <script src="{{ asset('W2WInventory/assets/js/main.js') }}"></script>
+
+  <!-- Ajax Jquery -->
+  <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+
+  @yield('scripts') 
 </body>
 
 </html>

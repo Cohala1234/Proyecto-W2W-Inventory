@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\typeUser;
+use Illuminate\Support\Facades\Validator;
 
 class TypeUserController extends Controller
 {
@@ -14,9 +15,20 @@ class TypeUserController extends Controller
      */
     public function index()
     {
-        $date['typeU']=typeUser::paginate(8);
+        /*$date['typeU']=typeUser::paginate(8);
         //para retornar la vista
-        return view('typeUser.index', $date);
+        return view('typeUser.index', $date);*/
+        return view('typeUser.index');
+
+    }
+    
+    public function fetchtypeuser()
+    {
+        $typeUsers = typeUser::all();
+        return response()->json([
+            'typeUsers'=>$typeUsers,
+        ]);
+
     }
 
     /**
@@ -38,10 +50,33 @@ class TypeUserController extends Controller
      */
     public function store(Request $request)
     {
-        //save db
-        $dateTypeUser = request()->except('_token');
-        typeUser::insert($dateTypeUser);
-        return redirect('typeUser')->with('message','El registro se creo correctamente');
+        $reglas = [
+            "typeUser" => 'required|alpha',
+        ];
+        $mensajes = [
+            "required" => "Campo Obligatorio",
+            "alpha" => "Permitido solo letras",
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }
+        else
+        {
+            $tUser = new typeUser;
+            $tUser->typeUser = $request->input('typeUser');
+            $tUser->save();
+            return response()->json([
+                'status'=>200,
+                'message'=>'El registro se creo correctamente',
+            ]);
+        }
     }
     /**
      * Display the specified resource.
@@ -62,9 +97,21 @@ class TypeUserController extends Controller
      */
     public function edit($id)
     {
-        //
-        $tyUEdit=typeUser::findOrFail($id);
-        return view('typeUser.edit', compact('tyUEdit'));
+        $typeUsers = typeUser::find($id);
+        if ($typeUsers) 
+        {
+            return response()->json([
+                'status'=>200,
+                'typeUsers'=>$typeUsers,
+            ]);
+        }
+        else
+        {
+            return response()->json([
+                'status'=>404,
+                'message'=>'Tipo usuario no encontrado',
+            ]);
+        }
     }
 
     /**
@@ -76,10 +123,43 @@ class TypeUserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //save db
-        $dateTypeUser = request()->except(['_token','_method']);
-        typeUser::where('id','=',$id)->update($dateTypeUser);
-        return redirect('typeUser')->with('message','El registro se actualizo correctamente');
+        $reglas = [
+            "typeUser" => 'required|alpha',
+        ];
+        $mensajes = [
+            "required" => "Campo Obligatorio",
+            "alpha" => "Permitido solo letras",
+        ];
+
+        $validator = Validator::make($request->all(), $reglas, $mensajes);
+
+        if($validator->fails())
+        {
+            return response()->json([
+                'status'=>400,
+                'errors'=>$validator->messages(),
+            ]);
+        }
+        else
+        {
+            $tUser = typeUser::find($id);
+            if ($tUser) 
+            {
+                $tUser->typeUser = $request->input('typeUser');
+                $tUser->update();
+                return response()->json([
+                    'status'=>200,
+                    'message'=>'El registro se creo correctamente',
+                ]);
+            }
+            else
+            {
+                return response()->json([
+                    'status'=>404,
+                    'message'=>'Tipo usuario no encontrado',
+                ]);
+            }
+        }
     }
 
     /**
@@ -88,8 +168,13 @@ class TypeUserController extends Controller
      * @param  \App\Models\typeUser  $typeUser
      * @return \Illuminate\Http\Response
      */
-    public function destroy(typeUser $typeUser)
+    public function destroy($id)
     {
-        //
+        $tUser = typeUser::find($id);
+        $tUser->delete();
+        return response()->json([
+            'status'=>200,
+            'message'=>'El registro se elimino correctamente',
+        ]);
     }
 }
