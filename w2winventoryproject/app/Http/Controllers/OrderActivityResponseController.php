@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\orderActivityResponse;
+use App\Models\generalActivity;
+use App\Models\responseActivity;
+use App\Models\workOrder;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +18,9 @@ class OrderActivityResponseController extends Controller
      */
     public function index()
     {
-        //
+        $date['orderResponse']=orderActivityResponse::all();
+
+        return view('orderResponse.index', $date);
     }
 
     /**
@@ -36,7 +41,16 @@ class OrderActivityResponseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orderResponse = request()->except('_token');
+        $generalActivity=generalActivity::all();
+        $responseActivity=responseActivity::all();
+        $workOrder=workOrder::all();
+        orderActivityResponse::insert($orderResponse);
+        return redirect('orderResponse')
+        ->with('responseActivity',$responseActivity)
+        ->with('generalActivity', $generalActivity)
+        ->with('workOrder', $workOrder)
+        ->with('message', 'Se registro correctamente');
     }
 
     /**
@@ -56,9 +70,10 @@ class OrderActivityResponseController extends Controller
      * @param  \App\Models\orderActivityResponse  $orderActivityResponse
      * @return \Illuminate\Http\Response
      */
-    public function edit(orderActivityResponse $orderActivityResponse)
+    public function edit($id)
     {
-        //
+        $orderResponseEdit = orderActivityResponse::findOrFail($id);
+        return view('orderResponse.edit', compact('orderResponseEdit'));
     }
 
     /**
@@ -68,9 +83,12 @@ class OrderActivityResponseController extends Controller
      * @param  \App\Models\orderActivityResponse  $orderActivityResponse
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, orderActivityResponse $orderActivityResponse)
+    public function update(Request $request, $id)
     {
-        //
+        $orderResponse = request()->except('_token', '_method');
+
+        orderActivityResponse::where('id', '=', $id)->update($orderResponse);
+        return redirect('orderResponse');
     }
 
     /**

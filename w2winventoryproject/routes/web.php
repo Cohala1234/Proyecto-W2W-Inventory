@@ -10,6 +10,7 @@ use App\Http\Controllers\UnityMeasurementController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DepartamentsController;
 use App\Http\Controllers\GeneralActivityController;
+use App\Http\Controllers\OrderActivityResponseController;
 use App\Http\Controllers\OrderTypeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResponseActivityController;
@@ -118,6 +119,10 @@ Route::resource('generalActivity', GeneralActivityController::class)->middleware
 //WorkOrder
 Route::resource('workOrder', WorkOrderController::class)->middleware('auth');
 //end WorkOrder
+
+//Order Response
+Route::resource('orderResponse', OrderActivityResponseController::class)->middleware('auth');
+//end Order Response
 
 Auth::routes();
 
