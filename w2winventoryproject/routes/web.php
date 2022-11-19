@@ -9,6 +9,7 @@ use App\Http\Controllers\TypeClientsController;
 use App\Http\Controllers\UnityMeasurementController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DepartamentsController;
+use App\Http\Controllers\OrderTypeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SectionProductController;
@@ -16,6 +17,7 @@ use App\Http\Controllers\SectorMasterController;
 use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TypeProductController;
 use App\Http\Controllers\WarehouseController;
+use App\Http\Controllers\SubClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -93,6 +95,14 @@ Route::resource('client', ClientController::class)->middleware('auth');
 //Warehouse
 Route::resource('warehouse', WarehouseController::class)->middleware('auth');
 //endWarehouse
+
+//orderType
+Route::resource('orderType', OrderTypeController::class)->middleware('auth');
+//endOrderType
+
+//sub_clients
+Route::resource('subClient', SubClientController::class)->middleware('auth');
+//end sub_clients
 
 Auth::routes();
 

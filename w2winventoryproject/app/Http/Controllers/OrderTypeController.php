@@ -15,7 +15,9 @@ class OrderTypeController extends Controller
      */
     public function index()
     {
-        //
+        $date['orderType']=orderType::paginate(8);
+
+        return view('orderType.index', $date);
     }
 
     /**
@@ -36,7 +38,10 @@ class OrderTypeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $orderType = request()->except('_token');
+        orderType::insert($orderType);
+
+        return redirect('orderType')->with('message','El registro se creo correctamente');
     }
 
     /**
@@ -56,9 +61,10 @@ class OrderTypeController extends Controller
      * @param  \App\Models\orderType  $orderType
      * @return \Illuminate\Http\Response
      */
-    public function edit(orderType $orderType)
+    public function edit($id)
     {
-        //
+        $orderEdit = orderType::findOrFail($id);
+        return view('orderType.edit', compact('orderEdit'));
     }
 
     /**
@@ -68,9 +74,11 @@ class OrderTypeController extends Controller
      * @param  \App\Models\orderType  $orderType
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, orderType $orderType)
+    public function update(Request $request, $id)
     {
-        //
+        $orderType = request()->except(['_token','_method']);
+        orderType::where('id', '=', $id)->update($orderType);
+        return redirect('orderType')->with('message','El registro se actualizo correctamente');
     }
 
     /**
