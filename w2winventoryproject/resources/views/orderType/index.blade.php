@@ -42,7 +42,7 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Nombre de la Seccion</th>
+                        <th scope="col">Nombre de la Orden</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>

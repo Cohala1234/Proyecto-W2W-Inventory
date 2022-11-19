@@ -9,6 +9,7 @@ use App\Http\Controllers\TypeClientsController;
 use App\Http\Controllers\UnityMeasurementController;
 use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DepartamentsController;
+use App\Http\Controllers\GeneralActivityController;
 use App\Http\Controllers\OrderTypeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResponseActivityController;
@@ -108,6 +109,10 @@ Route::resource('subClient', SubClientController::class)->middleware('auth');
 //responseActivity
 Route::resource('response', ResponseActivityController::class)->middleware('auth');
 //end responseActivity
+
+//GeneralActivity
+Route::resource('generalActivity', GeneralActivityController::class)->middleware('auth');
+//end GeneralActivity
 
 Auth::routes();
 

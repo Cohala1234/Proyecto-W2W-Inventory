@@ -15,7 +15,8 @@ class GeneralActivityController extends Controller
      */
     public function index()
     {
-        //
+        $date['generalActivity']= generalActivity::paginate(8);
+        return view('generalActivity.index', $date);
     }
 
     /**
@@ -36,7 +37,10 @@ class GeneralActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $generalActivity = request()->except('_token');
+        generalActivity::insert($generalActivity);
+
+        return redirect('generalActivity')->with('message','El registro se creo correctamente');
     }
 
     /**
@@ -56,9 +60,10 @@ class GeneralActivityController extends Controller
      * @param  \App\Models\generalActivity  $generalActivity
      * @return \Illuminate\Http\Response
      */
-    public function edit(generalActivity $generalActivity)
+    public function edit($id)
     {
-        //
+        $generalEdit = generalActivity::findOrFail($id);
+        return view('generalActivity.edit', compact('generalEdit'));
     }
 
     /**
@@ -68,9 +73,11 @@ class GeneralActivityController extends Controller
      * @param  \App\Models\generalActivity  $generalActivity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, generalActivity $generalActivity)
+    public function update(Request $request, $id)
     {
-        //
+        $generalActivity = request()->except(['_token','_method']);
+        generalActivity::where('id', '=', $id)->update($generalActivity);
+        return redirect('generalActivity')->with('message','El registro se actualizo correctamente');
     }
 
     /**

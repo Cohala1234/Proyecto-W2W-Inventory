@@ -3,7 +3,7 @@
 @section('content')
     <div class="card">
         <div class="card-body">
-            <h5 class="card-title">Response Activity</h5>
+            <h5 class="card-title">General Activity</h5>
             @if(Session::has('message'))
 
                 <div class="alert alert-success alert-dismissible" role="alert">
@@ -12,21 +12,21 @@
 
             @endif
             <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Crear Response</button>
+            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Crear Activity</button>
             <!-- Modal -->
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="staticBackdropLabel">Crear Response</h5>
+                            <h5 class="modal-title" id="staticBackdropLabel">Crear Activity</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                        <form action="{{ url('/response') }}" method="POST">
+                        <form action="{{ url('/generalActivity') }}" method="POST">
                             <div class="modal-body">
                                 @csrf
                                     <div class="col-12">
-                                        <label for="nameSection" class="form-label">Nombre Response</label>
-                                        <input type="text" class="form-control" id="inputNanme4" name="response">
+                                        <label for="activityName" class="form-label">Nombre Activity</label>
+                                        <input type="text" class="form-control" id="inputNanme4" name="activityName">
                                     </div>
                             </div>
                             <div class="modal-footer">
@@ -42,22 +42,22 @@
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th scope="col">Nombre Response</th>
+                        <th scope="col">Nombre Activity</th>
                         <th scope="col">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($response as $respon)
+                    @foreach($generalActivity as $genAct)
                     <tr>
-                        <td>{{$respon->response}}</td>
+                        <td>{{$genAct->activityName}}</td>
                         <td>
-                            <a href="{{ url('/response/'.$respon->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
+                            <a href="{{ url('/generalActivity/'.$genAct->id.'/edit') }}"><button type="button" class="btn btn-warning">Editar</button></a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            {!! $response->links() !!}
+            {!! $generalActivity->links() !!}
             <!-- End Table with hoverable rows -->
 
         </div>
