@@ -15,7 +15,8 @@ class ResponseActivityController extends Controller
      */
     public function index()
     {
-        //
+        $date['response']= responseActivity::paginate(8);
+        return view('response.index', $date);
     }
 
     /**
@@ -36,7 +37,10 @@ class ResponseActivityController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $response = request()->except('_token');
+        responseActivity::insert($response);
+
+        return redirect('response')->with('message','El registro se creo correctamente');
     }
 
     /**
@@ -56,9 +60,10 @@ class ResponseActivityController extends Controller
      * @param  \App\Models\responseActivity  $responseActivity
      * @return \Illuminate\Http\Response
      */
-    public function edit(responseActivity $responseActivity)
+    public function edit($id)
     {
-        //
+        $responseEdit = responseActivity::findOrFail($id);
+        return view('response.edit', compact('responseEdit'));
     }
 
     /**
@@ -68,9 +73,11 @@ class ResponseActivityController extends Controller
      * @param  \App\Models\responseActivity  $responseActivity
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, responseActivity $responseActivity)
+    public function update(Request $request, $id)
     {
-        //
+        $response = request()->except(['_token','_method']);
+        responseActivity::where('id', '=', $id)->update($response);
+        return redirect('response')->with('message','El registro se actualizo correctamente');
     }
 
     /**

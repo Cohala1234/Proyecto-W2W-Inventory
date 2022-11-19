@@ -11,6 +11,7 @@ use App\Http\Controllers\CountriesController;
 use App\Http\Controllers\DepartamentsController;
 use App\Http\Controllers\OrderTypeController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\ResponseActivityController;
 use App\Http\Controllers\SectionController;
 use App\Http\Controllers\SectionProductController;
 use App\Http\Controllers\SectorMasterController;
@@ -103,6 +104,10 @@ Route::resource('orderType', OrderTypeController::class)->middleware('auth');
 //sub_clients
 Route::resource('subClient', SubClientController::class)->middleware('auth');
 //end sub_clients
+
+//responseActivity
+Route::resource('response', ResponseActivityController::class)->middleware('auth');
+//end responseActivity
 
 Auth::routes();
 
