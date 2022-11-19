@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\workOrder;
+use App\Models\subClient;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -15,7 +16,9 @@ class WorkOrderController extends Controller
      */
     public function index()
     {
-        //
+        $date['workOrder']=workOrder::all();
+
+        return view('workOrder.index', $date);
     }
 
     /**
@@ -36,7 +39,11 @@ class WorkOrderController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $workOrder = request()->except('_token');
+        $subClient=subClient::all();
+        workOrder::insert($workOrder);
+        return redirect('workOrder')->with('subClient', $subClient)
+        ->with('message', 'Se registro correctamente');
     }
 
     /**
@@ -56,9 +63,10 @@ class WorkOrderController extends Controller
      * @param  \App\Models\workOrder  $workOrder
      * @return \Illuminate\Http\Response
      */
-    public function edit(workOrder $workOrder)
+    public function edit($id)
     {
-        //
+        $workOrderEdit = workOrder::findOrFail($id);
+        return view('workOrder.edit', compact('workOrderEdit'));
     }
 
     /**
@@ -68,9 +76,12 @@ class WorkOrderController extends Controller
      * @param  \App\Models\workOrder  $workOrder
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, workOrder $workOrder)
+    public function update(Request $request, $id)
     {
-        //
+        $workOrder = request()->except('_token', '_method');
+
+        workOrder::where('id', '=', $id)->update($workOrder);
+        return redirect('workOrder');
     }
 
     /**

@@ -20,6 +20,7 @@ use App\Http\Controllers\SiteController;
 use App\Http\Controllers\TypeProductController;
 use App\Http\Controllers\WarehouseController;
 use App\Http\Controllers\SubClientController;
+use App\Http\Controllers\WorkOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -113,6 +114,10 @@ Route::resource('response', ResponseActivityController::class)->middleware('auth
 //GeneralActivity
 Route::resource('generalActivity', GeneralActivityController::class)->middleware('auth');
 //end GeneralActivity
+
+//WorkOrder
+Route::resource('workOrder', WorkOrderController::class)->middleware('auth');
+//end WorkOrder
 
 Auth::routes();
 
